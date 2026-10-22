@@ -1,0 +1,3 @@
+# GitHub Pages(Jekyll) — 생성기·원본은 게시하지 않는다
+exclude: [build.py, README.md, _src, deploy.sh]
+include: [404.html]

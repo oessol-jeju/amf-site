@@ -1,0 +1,27 @@
+<!--meta
+title: 페이지를 찾을 수 없습니다 — 애월뮤직팩토리
+desc:
+nav: none
+-->
+<div class="phead">
+  <div class="wrap">
+    <h1><small>404</small>페이지를 찾을 수 없습니다</h1>
+    <div class="btns" style="margin-top:22px"><a class="btn go" href="./">공연 안내로</a><a class="btn ghost" href="booking.html">대관 예약</a></div>
+  </div>
+</div>
+<!--scripts-->
+<script>
+/* 옛 Squarespace 주소 → 새 주소 (GitHub Pages는 301을 못 하므로 여기서 넘긴다) */
+(function () {
+  var p = location.pathname.replace(/\/+$/, '').toLowerCase();
+  var MAP = {
+    '/home': '/', '/contact': '/venue.html#access', '/venues': '/venue.html', '/venues/music': '/venue.html',
+    '/equipment': '/venue.html', '/096700289924': 'https://oessol.kr/jeju-events/',
+    '/092418322546': '/recruit.html', '/074030351002': '/essencia.html',
+    '/event': '/', '/stories': '/', '/blog': '/', '/amf-archive': '/', '/forms': '/venue.html', '/cart': '/'
+  };
+  if (p.indexOf('/s/') === 0) { var f = p.slice(3); MAP[p] = /^poster-/.test(f) ? '/img/posters/' + f : '/files/' + f; }
+  var to = MAP[p] || (p.indexOf('/venues/') === 0 ? '/venue.html' : p.indexOf('/event/') === 0 ? '/' : '');
+  if (to) location.replace(to);
+})();
+</script>
