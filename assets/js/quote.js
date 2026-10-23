@@ -77,6 +77,10 @@
         (l.amt < 0 ? '-' + num(-l.amt) : num(l.amt)) + '원</td></tr>';
     }).join('');
 
+    var pa = d.pr.payment_account || {};
+    var acct = (pa.public && pa.bank && pa.number)
+      ? '입금 계좌 <b style="color:#1A1A1A">' + esc(pa.bank) + ' ' + esc(pa.number) + '</b> (예금주 ' + esc(pa.holder) + ')'
+      : '입금 계좌는 예약 확인 연락 때 안내드립니다.';
     var refund = d.pr.cancellation.tiers.map(function (x) { return x.label + ' ' + Math.round(x.refund_rate * 100) + '%'; }).join(' · ');
     var to = d.org ? '<b>' + esc(d.org) + '</b> 귀하' : '<span class="q-blank"></span> 귀하';
     var contact = [d.name ? '담당 ' + esc(d.name) : '', esc(d.phone || ''), esc(d.email || '')].filter(Boolean).join(' · ');
@@ -99,7 +103,7 @@
       '<tr class="q-sum"><td class="q-l" colspan="3">부가가치세 (10%)</td><td class="q-r">' + num(d.q.vat) + '원</td></tr></table>' +
       '<div class="q-total"><div class="q-k">합계 금액 (부가세 포함)</div><div class="q-v">' + num(d.q.total) + '<small>원</small></div></div>' +
       '<div class="q-dep"><div><div class="q-lbl">예약 확정 안내</div>예약금(합계의 ' + Math.round(d.pr.deposit_rate * 100) + '%)을 입금하시면 예약이 확정됩니다.<br>' +
-      '<small>잔금 ' + won(d.q.balance) + '은 사용일 전까지 입금해 주십시오. 입금 계좌는 예약 확인 연락 때 안내드립니다.</small></div>' +
+      '<small>잔금 ' + won(d.q.balance) + '은 사용일 전까지 입금해 주십시오. ' + acct + '</small></div>' +
       '<div class="q-dv">' + num(d.q.deposit) + '<small>원</small></div></div>' +
       '<h2>취소 환불 (낸 금액 기준)</h2><p class="q-refund">' + esc(refund) + ' · AMF 사정으로 취소하면 낸 금액 전액을 돌려드립니다.</p>' +
       '<h2>사용 안내</h2><ul>' + USE_NOTES.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>' +
