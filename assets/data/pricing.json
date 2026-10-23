@@ -17,10 +17,10 @@
   "_balance_due_출처": "A27 사용일 전까지",
   "payment_account": {
     "holder": "지티글로벌(주)",
-    "bank": null,
-    "number": null,
-    "public": false,
-    "_출처": "A19 · A23 — 은행·계좌번호 확인 전 비공개"
+    "bank": "농협은행",
+    "number": "301-0375-6449-11",
+    "public": true,
+    "_출처": "A19·A23 · 2026-10-23 본인 지시(견적서에 입금계좌). 02_amf/02_총무회계 AMF 인보이스 2건 + 통장사본(2025-10-17 개설, 제주영업부) 대조 일치"
   },
   "cancellation": {
     "basis": "days_before_use_date_excluding_use_date",
