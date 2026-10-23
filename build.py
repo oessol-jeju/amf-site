@@ -31,7 +31,7 @@ FOOT = '''<footer class="foot">
       <div><b>운영 시간</b>평일 10:00~18:00<br>월요일 휴관</div>
       <div><b>바로가기</b><a href="{naver}">네이버 예약</a><br><a href="https://www.instagram.com/aewolmusicfactory/">Instagram</a><br><a href="privacy.html">개인정보 처리방침</a></div>
     </div>
-    <p class="biz">지티글로벌(주) · 대표 최명성 · 사업자등록번호 616-81-51642 · 제주특별자치도 제주시 애월읍 엄수로 63<br><span class="todo">위탁 운영 외솔컴퍼니(대표 김외솔) — 표기 여부·명칭 본인 결정</span></p>
+    <p class="biz">지티글로벌(주) · 대표 최명성 · 사업자등록번호 616-81-51642 · 제주특별자치도 제주시 애월읍 엄수로 63<br>위탁 운영 김외솔</p>
   </div>
 </footer>'''.replace('{naver}', NAVER)
 
