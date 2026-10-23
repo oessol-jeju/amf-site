@@ -55,7 +55,7 @@ LAYOUT = '''<!doctype html>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
 <link rel="stylesheet" href="assets/css/site.css?v={v}">
 </head>
-<body>
+<body{bodycls}>
 <a class="skip" href="#main">본문 바로가기</a>
 <header class="top">
   <div class="in">
@@ -117,7 +117,7 @@ def main():
         html = LAYOUT.format(
             title=meta.get('title', '애월뮤직팩토리'), desc=meta.get('desc', ''),
             robots='<meta name="robots" content="noindex">\n' if (staging or name == '404') else '',
-            url=url, site=SITE, base='<base href="/">\n' if name == '404' else '', og=meta.get('og', 'og.jpg'), v=ASSET_V,
+            url=url, site=SITE, base='<base href="/">\n' if name == '404' else '', bodycls=(' class="%s"' % meta['theme']) if meta.get('theme') else '', og=meta.get('og', 'og.jpg'), v=ASSET_V,
             nav=nav_html(meta.get('nav', name)), naver=NAVER,
             body=body, foot=FOOT, scripts=scripts.replace('{v}', ASSET_V))
         (ROOT / f'{name}.html').write_text(html, encoding='utf-8')

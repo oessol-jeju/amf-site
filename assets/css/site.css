@@ -260,3 +260,73 @@ input:focus,select:focus,textarea:focus{border-color:var(--fin);outline:none}
   .bar .btn{flex:0 0 auto;min-height:44px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* ── 밝은 톤 페이지 (대관 예약, 10/23 본인 선택) — 본문만 밝게, 메뉴·푸터는 공통 ── */
+.hidden{display:none}
+body.light main{
+  --ink:#fff; --ink2:#F5F3EF; --ink3:#ECE9E2; --line:#D9D6CF; --line2:#C9C5BC;
+  --fg:#1A1A1A; --dim:#666158; --faint:#8E887D; --fin:#9A7A2E; --bellows:#B5442F; --ok:#9A7A2E;
+  color-scheme:light; background:#fff; color:var(--fg)}
+body.light main section{padding:56px 0;border-top:1px solid var(--line)}
+body.light main h2{font-family:var(--sans);font-size:24px;margin:0 0 8px}
+body.light .hero-l{padding:64px 0 48px}
+body.light .eyebrow{font-size:12px;letter-spacing:.25em;color:var(--fin);font-weight:700}
+body.light .hero-l h1{font-size:40px;line-height:1.3;margin:12px 0 0;font-family:var(--sans)}
+body.light .h2sub{color:var(--dim);margin:0 0 24px;font-size:15px}
+body.light .label{font-size:12px;letter-spacing:.2em;color:var(--fin);font-weight:700;margin-bottom:8px}
+body.light .btn{border-radius:0;min-height:48px}
+body.light .btn.go{background:#1A1A1A;color:#fff}
+body.light .btn.go:hover{background:#333}
+body.light .btn.line{background:#fff;color:#1A1A1A;border:1px solid #1A1A1A}
+body.light .lgrid{display:grid;gap:1px;background:var(--line);border:1px solid var(--line)}
+body.light .g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+body.light .lgrid .cell{background:#fff;padding:20px 22px}
+body.light .big{font-size:28px;font-weight:700;line-height:1.3}
+body.light .big small{font-size:14px;font-weight:400;color:var(--dim);margin-left:4px}
+body.light .lchips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;align-items:center}
+body.light .lchips span{border:1px solid var(--line);padding:6px 14px;font-size:14px}
+body.light .lchips a{font-size:14px;color:var(--dim);margin-left:6px}
+body.light th{color:var(--dim)}
+body.light .lbook{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:40px;align-items:start}
+body.light .lcal{border:1px solid var(--line)}
+body.light .lcal .mcal-head{padding:8px 10px;margin:0;border-bottom:1px solid var(--line)}
+body.light .lcal .mcal-head b{font-family:var(--sans);font-size:17px}
+body.light .lcal .mcal-head button{border:0;background:none;color:#1A1A1A;font-size:20px;width:44px;height:44px}
+body.light .lcal .mcal-head button:disabled{color:var(--line2)}
+body.light .mcal{gap:0}
+body.light .mcal .dow{padding:8px 0}
+body.light .mcal button{border:0;border-top:1px solid var(--line);border-radius:0;background:#fff;min-height:54px}
+body.light .mcal button:disabled{background:#fff;color:#C9C5BC}
+body.light .mcal button[aria-pressed="true"]{background:#1A1A1A;color:#fff}
+body.light .mcal button[aria-pressed="true"] .we{color:#fff}
+body.light .mcal .we{color:var(--fin)}
+body.light .mcal .dots i.x{background:#D9D6CF}
+body.light .legend{padding:10px 12px;margin:0;border-top:1px solid var(--line);font-size:13px}
+body.light .legend i.x{background:#D9D6CF}
+body.light .legend .we{color:var(--fin)}
+body.light .seg button{border-radius:0;color:#1A1A1A;border-color:var(--line)}
+body.light .seg button[aria-pressed="true"]{background:#1A1A1A;border-color:#1A1A1A;color:#fff}
+body.light .blocks{grid-template-columns:minmax(0,1fr);gap:8px}
+body.light .block{flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 12px;border-radius:0;border-color:var(--line);padding:12px 14px;min-height:56px}
+body.light .block b{font-family:var(--sans);font-size:16px;font-weight:500}
+body.light .block .p{margin:0}
+body.light .block[aria-pressed="true"]{border:1.5px solid #1A1A1A;background:var(--ink2)}
+body.light .block[aria-pressed="true"] b::after{color:#1A1A1A}
+body.light input[type=text],body.light input[type=tel],body.light input[type=email],body.light input[type=number],body.light select,body.light textarea{
+  background:#fff;border-color:var(--line);border-radius:0;color:#1A1A1A}
+body.light .field label b{color:var(--fin)}
+body.light .chk input{accent-color:#1A1A1A}
+body.light .quote{border:0;border-top:1.5px solid var(--fin);border-bottom:1.5px solid var(--fin);border-radius:0;padding:14px 2px;margin:18px 0;background:#fff}
+body.light .quote .q.tot span:last-child{color:var(--fin);font-size:22px}
+body.light .consent{background:var(--ink2);border:0;border-radius:0}
+body.light .msg{background:var(--ink2);margin-bottom:14px}
+body.light details{border-bottom:1px solid var(--line)}
+body.light summary{cursor:pointer;padding:16px 0;font-weight:500;min-height:44px}
+body.light details p{margin:0 0 16px;color:var(--dim)}
+body.light .consent-d{border:0}
+body.light .consent-d summary{padding:6px 0;font-size:14px}
+@media (max-width:820px){
+  body.light .lbook{grid-template-columns:minmax(0,1fr)}
+  body.light .g4{grid-template-columns:repeat(2,minmax(0,1fr))}
+  body.light .hero-l h1{font-size:30px}
+}
