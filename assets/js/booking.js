@@ -119,8 +119,9 @@
     if (sel.length && S.date) {
       var first = sel[0].from, last = sel[sel.length - 1].to;
       var selH = {}; sel.forEach(function (s) { for (var h = s.from; h < s.to; h++) selH[h] = 1; });
-      while (maxB < MAX_OT && first - maxB - 1 >= S.pr.open_hour && !busy(S.date, first - maxB - 1) && !selH[first - maxB - 1]) maxB++;
-      while (maxA < MAX_OT && last + maxA + 1 <= S.pr.close_hour && !busy(S.date, last + maxA) && !selH[last + maxA]) maxA++;
+      var ot = S.sp.overtime || {}, mB = ot.max_hours_before != null ? ot.max_hours_before : MAX_OT, mA = ot.max_hours_after != null ? ot.max_hours_after : MAX_OT;
+      while (maxB < mB && first - maxB - 1 >= S.pr.open_hour && !busy(S.date, first - maxB - 1) && !selH[first - maxB - 1]) maxB++;
+      while (maxA < mA && last + maxA + 1 <= S.pr.close_hour && !busy(S.date, last + maxA) && !selH[last + maxA]) maxA++;
     }
     [['before', maxB], ['after', maxA]].forEach(function (x) {
       var el = $(x[0]), o = '';

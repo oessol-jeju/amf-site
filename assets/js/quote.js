@@ -5,7 +5,8 @@
   var SUPPLIER = {
     name: '지티글로벌(주)', venue: '애월뮤직팩토리', no: '616-81-51642', rep: '최명성',
     addr: '제주특별자치도 제주시 애월읍 엄수로 63', biz: '서비스업 / 공연 및 제작관련 서비스업',
-    tel: '064-711-9263', mail: 'ceo@aewolmusicfactory.com'
+    tel: '064-711-9263', mail: 'ceo@aewolmusicfactory.com',
+    signer: '김외솔'   // 서명란 — 2026-10-23 본인 지시 '대표 김외솔(인), 직인생략'. 위 rep(최명성)는 사업자등록증 대표자
   };  // 사업자등록증(2025-10-17 정정 발급) 대조 2026-10-22
   var USE_NOTES = [
     '대관 시간은 입장부터 퇴실까지이며, 준비·리허설·정리 시간을 포함합니다.',
@@ -107,7 +108,7 @@
       '<tr><td class="q-k">상호</td><td>' + SUPPLIER.name + ' (' + SUPPLIER.venue + ')</td><td class="q-k">등록번호</td><td>' + SUPPLIER.no + '</td></tr>' +
       '<tr><td class="q-k">대표자</td><td>' + SUPPLIER.rep + '</td><td class="q-k">업태 / 종목</td><td>' + SUPPLIER.biz + '</td></tr>' +
       '<tr><td class="q-k">사업장</td><td colspan="3">' + SUPPLIER.addr + ' · ' + SUPPLIER.tel + ' · ' + SUPPLIER.mail + '</td></tr>' +
-      '</table><div class="q-sign"><small>공급자</small>' + SUPPLIER.name + '<br>대표 ' + SUPPLIER.rep + '<span class="q-seal">(인)</span></div></div>' +
+      '</table><div class="q-sign"><small>공급자</small>' + SUPPLIER.venue + '<br>대표 ' + SUPPLIER.signer + '<span class="q-seal">(인)</span><small>직인생략</small></div></div>' +
       '</div>';
     return { no: no, body: body, html: '<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>AMF A홀 대관 견적서 ' + no + '</title>' +
       '<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet"><style>' + CSS + '</style></head><body>' + body + '</body></html>' };

@@ -1,5 +1,5 @@
 {
-  "version": "2026-10-23-v6",
+  "version": "2026-10-23-v7",
   "confirmed": true,
   "_안내": "confirmed true = 홈페이지에 금액 표시·견적서 발행 (2026-10-23 본인 지시 '요금도 자동 계산될 수 있게'). 항목별 '확정' false 는 남은 본인 결정.",
   "operator": {
@@ -36,8 +36,8 @@
         "max_days_before": 29,
         "refund_rate": 0.5,
         "label": "29일 전부터 15일 전까지",
-        "확정": false,
-        "_출처": "A28에 이 구간 명시 없음 — 해석값, 본인 확인"
+        "확정": true,
+        "_출처": "2026-10-23 본인 \"제안대로 확정\" — 29일 전부터 15일 전까지 50%"
       },
       {
         "min_days_before": 8,
@@ -152,7 +152,7 @@
         "max_hours_before": 2,
         "max_hours_after": 2,
         "outside_hours": "phone",
-        "_제안_확정전": "cap_at_slot_price · max_hours 2 — 본인 확정 전"
+        "_확정": "2026-10-23 본인 \"제안대로 확정\" — 초과 금액은 그 시간대 요금을 넘지 않음(cap) · 폼 연장 앞뒤 최대 2시간"
       },
       "included": [
         "음향 장비",
