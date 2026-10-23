@@ -330,3 +330,8 @@ body.light .consent-d summary{padding:6px 0;font-size:14px}
   body.light .g4{grid-template-columns:repeat(2,minmax(0,1fr))}
   body.light .hero-l h1{font-size:30px}
 }
+
+body.light .qbtns{display:flex;flex-wrap:wrap;gap:8px;margin:-6px 0 16px}
+body.light .qbtns .btn{flex:1 1 180px;min-height:44px;font-size:14px}
+body.light .qbtns .btn:disabled{opacity:.4}
+.qbtns[hidden]{display:none!important}

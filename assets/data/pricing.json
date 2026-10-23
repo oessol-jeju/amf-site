@@ -1,7 +1,7 @@
 {
-  "version": "2026-10-18-v5",
-  "confirmed": false,
-  "_안내": "confirmed는 공개 전환일(DNS 전환일) true로 켠다. 항목별 '확정' true = 본인 확정분.",
+  "version": "2026-10-23-v6",
+  "confirmed": true,
+  "_안내": "confirmed true = 홈페이지에 금액 표시·견적서 발행 (2026-10-23 본인 지시 '요금도 자동 계산될 수 있게'). 항목별 '확정' false 는 남은 본인 결정.",
   "operator": {
     "party": "지티글로벌(주)",
     "business_no": "616-81-51642",

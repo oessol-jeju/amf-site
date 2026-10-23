@@ -231,10 +231,25 @@
       .then(function () { btn.disabled = false; btn.textContent = '예약 신청하기'; });
   });
 
+  /* ── 견적서 (quote.js) — 지금 고른 내용을 넘긴다 ── */
+  window.AMFBookingData = function () {
+    if (!S.pr || !S.pr.confirmed || !S.date || !S.slots.length) return null;
+    var qq = query(), v = function (id) { return $(id).value.trim(); };
+    return { pr: S.pr, q: AMFPricing.calc(S.pr, qq), date: S.date, use: S.use, kind: v('kind'),
+      sel: S.sp.slots.filter(function (s) { return S.slots.indexOf(s.id) >= 0; }),
+      before: qq.before, after: qq.after, org: v('org'), name: v('name'), phone: v('phone'), email: v('email'), att: v('att') };
+  };
+  function quoteButtons() {
+    var on = !!window.AMFBookingData();
+    ['qPdf', 'qPrint'].forEach(function (id) { var b = $(id); if (b) b.disabled = !on; });
+    var w = $('qWrap'); if (w) w.hidden = !(S.pr && S.pr.confirmed);
+  }
+  document.addEventListener('change', quoteButtons); document.addEventListener('click', function () { setTimeout(quoteButtons, 0); });
+
   /* ── 시작 ── */
   AMFPricing.load().then(function (pr) {
     if (!pr) { say('요금표를 불러오지 못했습니다. 064-711-9263으로 문의해 주십시오.', 1); return; }
     S.pr = pr; S.sp = AMFPricing.space(pr, SPACE);
-    renderCal(); renderBlocks(); update(); loadTaken();
+    renderCal(); renderBlocks(); update(); loadTaken(); quoteButtons();
   });
 })();

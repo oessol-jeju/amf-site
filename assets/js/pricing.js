@@ -31,7 +31,7 @@
 
       // 1) 시간대 요금
       var blockSum = 0;
-      sel.forEach(function (s) { blockSum += unit(s); lines.push({ k: 'slot', label: s.name + ' (' + A.hh(s.from) + '–' + A.hh(s.to) + ')', amt: unit(s) }); });
+      sel.forEach(function (s) { blockSum += unit(s); lines.push({ k: 'slot', label: s.name + ' (' + A.hh(s.from) + '–' + A.hh(s.to) + ')', amt: unit(s), unit: A.won(unit(s)), qty: '1' }); });
 
       // 2) 이어진 시간대 묶음 할인 — 떨어진 시간대는 할인 없음
       var bd = sp.combine.bundle_discount, groups = [], cur = [sel[0]];
@@ -45,7 +45,7 @@
         if (gr.length > 1 && r) {
           var sum = 0; gr.forEach(function (s) { sum += unit(s); });
           disc += Math.round(sum * r);
-          lines.push({ k: 'disc', label: '이어진 ' + gr.length + '개 시간대 할인 ' + Math.round(r * 100) + '%', amt: -Math.round(sum * r) });
+          lines.push({ k: 'disc', label: '이어진 ' + gr.length + '개 시간대 할인 ' + Math.round(r * 100) + '%', amt: -Math.round(sum * r), unit: A.won(sum) + ' × ' + Math.round(r * 100) + '%', qty: '' });
         }
       });
 
@@ -61,7 +61,7 @@
           var b = bySlot[id], per = unit(b.s) / b.s.hours, amt = per * b.n;
           if (ot.cap_at_slot_price) amt = Math.min(amt, unit(b.s));
           amt = Math.round(amt); over += amt;
-          lines.push({ k: 'over', label: label + ' ' + b.n + '시간 (' + b.s.name + ' 시간대 · 시간당 ' + A.won(per) + ')', amt: amt });
+          lines.push({ k: 'over', label: label + ' ' + b.n + '시간 (' + b.s.name + ' 시간대 · 시간당 ' + A.won(per) + ')', short: label + ' (' + b.s.name + ' 시간대)', amt: amt, unit: A.won(per) + ' / 시간', qty: b.n + '시간' });
         });
       }
       var first = sel[0].from, last = sel[sel.length - 1].to;
@@ -74,12 +74,12 @@
       if (q.engineer) {
         var e = pr.options.filter(function (o) { return o.id === 'engineer'; })[0];
         var ea = e.base_price + Math.max(0, hours - e.base_hours) * e.extra_per_hour;
-        opt += ea; lines.push({ k: 'opt', label: '음향·조명 엔지니어 ' + hours + '시간', amt: ea });
+        opt += ea; lines.push({ k: 'opt', label: '음향·조명 엔지니어 ' + hours + '시간', short: '음향·조명 엔지니어', amt: ea, unit: e.base_hours + '시간 ' + A.won(e.base_price) + ' + ' + A.won(e.extra_per_hour) + '/시간', qty: hours + '시간' });
       }
       if (q.crew > 0) {
         var c = pr.options.filter(function (o) { return o.id === 'crew'; })[0];
         var ca = c.price * q.crew * hours;
-        opt += ca; lines.push({ k: 'opt', label: '행사 스태프 ' + q.crew + '명 × ' + hours + '시간', amt: ca });
+        opt += ca; lines.push({ k: 'opt', label: '행사 스태프 ' + q.crew + '명 × ' + hours + '시간', amt: ca, unit: A.won(c.price) + '/인·시간', qty: q.crew + '명×' + hours + '시간', short: '행사 스태프' });
       }
 
       var supply = blockSum - disc + over + opt, vat = Math.round(supply * pr.vat_rate), total = supply + vat;

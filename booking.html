@@ -17,7 +17,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="assets/css/site.css?v=202610231449">
+<link rel="stylesheet" href="assets/css/site.css?v=202610231502">
 </head>
 <body class="light">
 <a class="skip" href="#main">본문 바로가기</a>
@@ -120,6 +120,11 @@
       <div class="hp" aria-hidden="true"><label for="website">웹사이트</label><input type="text" id="website" tabindex="-1" autocomplete="off"></div>
 
       <div class="quote" id="quote" aria-live="polite"></div>
+      <div class="qbtns" id="qWrap" hidden>
+        <button class="btn line" type="button" id="qPdf" disabled>견적서 PDF 내려받기</button>
+        <button class="btn line" type="button" id="qPrint" disabled>견적서 인쇄</button>
+        <p class="muted" style="margin:6px 0 0;font-size:13px">날짜·시간대를 고르면 바로 받을 수 있습니다. 단체명·담당자를 먼저 적으면 견적서에 들어갑니다. 내부 결재용으로 출력하실 수 있습니다.</p>
+      </div>
 
       <details class="consent-d">
         <summary>개인정보 수집·이용 안내 (필수 확인)</summary>
@@ -173,8 +178,24 @@
 (function(){var b=document.querySelector('.burger'),n=document.getElementById('nav');
 b.addEventListener('click',function(){var o=n.classList.toggle('open');b.setAttribute('aria-expanded',o)});})();
 </script>
-<script src="assets/js/pricing.js?v=202610231449"></script>
-<script src="assets/js/booking.js?v=202610231449"></script>
+<script src="assets/js/pricing.js?v=202610231502"></script>
+<script src="assets/js/booking.js?v=202610231502"></script>
+<script src="assets/js/quote.js?v=202610231502"></script>
+<script>
+(function () {
+  var msg = function (t) { var m = document.getElementById('msg'); m.innerHTML = t; m.className = 'msg show'; };
+  document.getElementById('qPdf').addEventListener('click', function () {
+    var d = window.AMFBookingData(); if (!d) return;
+    var b = this; b.disabled = true; b.textContent = '만드는 중…';
+    AMFQuoteDoc.pdf(d).catch(function () { msg('PDF를 만들지 못했습니다. [견적서 인쇄]에서 "PDF로 저장"을 고르셔도 됩니다.'); })
+      .then(function () { b.disabled = false; b.textContent = '견적서 PDF 내려받기'; });
+  });
+  document.getElementById('qPrint').addEventListener('click', function () {
+    var d = window.AMFBookingData(); if (!d) return;
+    if (!AMFQuoteDoc.print(d)) msg('팝업이 막혀 있습니다. 브라우저에서 이 사이트의 팝업을 허용해 주십시오.');
+  });
+})();
+</script>
 <script>
 /* 요금표·질문 답 — pricing.json 공개(confirmed) 뒤에만 금액을 쓴다 */
 AMFPricing.load().then(function (pr) {
