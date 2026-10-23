@@ -19,8 +19,10 @@ NAV = [
     ('booking',  'booking.html',                    '대관 예약'),
     ('jeju',     'https://oessol.kr/jeju-events/',   '문화예술정보'),
     ('venue',    'venue.html',                      '공연장 이용안내'),
-    ('essencia', 'essencia.html',                   '에센시아 합창단'),
-    ('recruit',  'recruit.html',                    '중창단 모집'),
+    ('essencia', 'essencia.html',                   '에센시아 합창단', [   # 하위 메뉴
+        ('kids',    'essencia.html#kids', '어린이합창단'),
+        ('recruit', 'recruit.html',       '중창단'),
+    ]),
 ]
 
 FOOT = '''<footer class="foot">
@@ -83,14 +85,24 @@ b.addEventListener('click',function(){{var o=n.classList.toggle('open');b.setAtt
 
 def nav_html(cur):
     out = []
-    for key, href, label in NAV:
+    for key, href, label, *rest in NAV:
+        kids = rest[0] if rest else []
         ext = href.startswith('http')
         attrs = f' href="{href}"'
         if ext:
             attrs += ' class="ext" target="_blank" rel="noopener"'
-        if key == cur:
+        if key == cur or any(k == cur for k, _, _ in kids):
             attrs += ' aria-current="page"'
-        out.append(f'      <a{attrs}>{label}</a>')
+        if not kids:
+            out.append(f'      <a{attrs}>{label}</a>')
+            continue
+        out.append('      <div class="dd">')
+        out.append(f'        <a{attrs}>{label}</a>')
+        out.append('        <div class="sub">')
+        for k, h, l in kids:
+            out.append(f'          <a href="{h}"' + (' aria-current="page"' if k == cur else '') + f'>{l}</a>')
+        out.append('        </div>')
+        out.append('      </div>')
     return '\n'.join(out)
 
 
