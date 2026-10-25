@@ -150,7 +150,7 @@ dl.kv dd{margin:0;color:var(--fg)}
 .cal .ev{font-size:11.5px;line-height:1.35;color:var(--dim)}
 .cal .ev b{display:block;color:var(--fg)}
 .cal .ev.h b{color:#f0b8ac} .cal .ev.s b{color:var(--fin)} .cal .ev.y b{color:#8fcbb5}
-.cal .ev.c b{color:#a9b6e8} .cal .ev.r b{color:var(--faint)} .cal .ev.e b{color:#e0c088}
+.cal .ev.c b{color:#a9b6e8} .cal .ev.p b{color:#e58f7e} .cal .ev.o b{color:#9fd3a8} .cal .ev.r b{color:var(--faint)} .cal .ev.e b{color:#e0c088}
 .cal .ev.off{color:var(--faint);font-size:11px}
 
 /* ── 사진 줄 ── */

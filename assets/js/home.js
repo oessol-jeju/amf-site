@@ -13,7 +13,7 @@
     .then(function (r) { return r.json(); })
     .then(function (d) {
       var P = d.programs;
-      var months = d.months.filter(function (m) { return m.published && m.ym >= thisYm; });
+      var months = AMFSchedule.months(d, thisYm, 3).map(function (ym) { var x = AMFSchedule.month(d, ym); x.ym = ym; return x; });
       if (!months.length) { cal.outerHTML = '<p class="note">일정은 전화로 안내드립니다. 064-711-9263</p>'; return; }
 
       function render(m) {
@@ -26,7 +26,7 @@
           var ks = m.days[dd] || [], note = (m.notes || {})[dd], body = '', href = '';
           ks.forEach(function (k) {
             var p = P[k]; if (!p) return;
-            var t = (m.times[dd] && m.times[dd][k]) || p.times;
+            var t = AMFSchedule.timesOf(m, d, dd, k);
             body += '<span class="ev ' + k + '"><b>' + esc(p.short) + '</b>' + t.join(' · ') + '</span>';
             if (!href && p.url) href = p.url;
           });

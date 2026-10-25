@@ -35,14 +35,16 @@
   /* AMF 공연 편성(schedule.json)의 공연 시간도 막는다 — 시작 시각부터 2시간. 시각이 없는 일정(대관 등)은 하루 전체 */
   function markShows() {
     return fetch('assets/data/schedule.json', { cache: 'no-cache' }).then(function (r) { return r.json(); }).then(function (d) {
-      d.months.forEach(function (m) {
+      var ym0 = today.slice(0, 7);
+      AMFSchedule.months(d, ym0, 13).forEach(function (ym) {
+        var m = AMFSchedule.month(d, ym);
         Object.keys(m.days).forEach(function (dd) {
-          var iso = m.ym + '-' + pad(+dd), set = S.taken[iso] || (S.taken[iso] = {});
+          var iso = ym + '-' + pad(+dd), set = S.taken[iso] || (S.taken[iso] = {});
           m.days[dd].forEach(function (k) {
-            var p = d.programs[k]; if (!p) return;
-            var t = (m.times[dd] && m.times[dd][k]) || p.times;
+            if (!d.programs[k]) return;
+            var t = AMFSchedule.timesOf(m, d, dd, k);
             if (!t.length) { for (var h = S.pr.open_hour; h < S.pr.close_hour; h++) set[h] = 1; return; }
-            t.forEach(function (x) { var h0 = +x.slice(0, 2); set[h0] = 1; set[h0 + 1] = 1; });
+            t.forEach(function (x) { var h0 = +x.slice(0, 2); set[h0] = 1; set[h0 + 1] = 1; if (+x.slice(3, 5) > 0) set[h0 + 2] = 1; });
           });
         });
       });
