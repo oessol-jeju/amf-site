@@ -4,7 +4,7 @@
   var GAS_URL = 'https://script.google.com/macros/s/AKfycbx8dG_Th9sG_4_9G4ko7M0HMkzgHL0EExAingyVG4pchCkLK6arupzbLBWy3NuS5i8DyQ/exec';
   // 실제 접수는 정식 주소에서만. 시험 주소(github.io·로컬)에서는 보내지 않고 화면에만 보여 준다.
   var LIVE = /(^|\.)aewolmusicfactory\.com$/.test(location.hostname);
-  var CONSENT_VERSION = '법무검토 v3 §1 (2026-10-18)';
+  var CONSENT_VERSION = '법무검토 v4 (2026-10-26)';
   var SPACE = 'a-hall', MAX_OT = 2;
 
   var $ = function (id) { return document.getElementById(id); };
@@ -170,6 +170,9 @@
     return q;
   }
 
+  /* 소식 수신: 수신 동의 + 국외 보관 동의(법무 v4 N5)가 모두 있어야 저장 */
+  function newsOK() { return $('news').checked && $('newsAbroad').checked; }
+
   /* ── 전송 ── */
   function say(t, err) { var m = $('msg'); m.innerHTML = t; m.className = 'msg show' + (err ? ' err' : ''); m.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }
   function stamp() { var d = new Date(Date.now() + 9 * 3600e3).toISOString(); return d.slice(0, 10) + ' ' + d.slice(11, 19); }
@@ -198,7 +201,7 @@
     var summary = '[' + useK + ' · ' + sel.map(function (s) { return s.name; }).join('+') + (q.joined || sel.length === 1 ? '' : ' 떨어진 시간대') +
       (qq.before ? ' · 앞당김 ' + qq.before + 'h' : '') + (qq.after ? ' · 연장 ' + qq.after + 'h' : '') +
       (qq.crew ? ' · 스태프 ' + qq.crew + '명' : '') + ' · 요금표 ' + S.pr.version + (S.pr.confirmed ? '' : '(비공개)') +
-      ' · 고지확인 ' + at + ' · 소식수신 ' + ($('news').checked ? 'Y' : 'N') + ']';
+      ' · 고지확인 ' + at + ' · 소식수신 ' + (newsOK() ? 'Y' : 'N') + ']';
 
     var payload = {
       date: S.date, purpose: S.use === 'event' ? 'performance' : 'rehearsal', slotIds: ids,
@@ -213,7 +216,7 @@
       v3: { space: SPACE, use: useK, slots: S.slots, joined: q.joined, overBefore: qq.before, overAfter: qq.after,
         blockSum: q.blockSum, discount: q.discount, overtime: q.overtime, optionAmt: q.options, total: q.total, deposit: q.deposit,
         pricingVersion: S.pr.version, pricingPublic: !!S.pr.confirmed, consentAt: at, consentVersion: CONSENT_VERSION,
-        newsletter: $('news').checked, newsletterAt: $('news').checked ? at : '' }
+        newsletter: newsOK(), newsletterAt: newsOK() ? at : '' }
     };
 
     if (!LIVE) {

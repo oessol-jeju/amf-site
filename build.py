@@ -52,9 +52,7 @@ LAYOUT = '''<!doctype html>
 <meta property="og:image" content="{site}/img/{og}">
 <meta property="og:url" content="{url}">
 {base}<link rel="icon" href="favicon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="assets/css/fonts.css?v={v}">
 <link rel="stylesheet" href="assets/css/site.css?v={v}">
 </head>
 <body{bodycls}>

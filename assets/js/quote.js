@@ -1,6 +1,6 @@
 /* AMF A홀 대관 견적서 — 대관 예약 화면에서 고른 내용으로 A4 1장을 만든다.
    양식: 07_대관서무/견적_AMF_A홀대관_가양금병창단또바기_261219.html (2026-10-15 발행본) 디자인.
-   PDF 내려받기는 html2pdf(cdnjs)를 그때 불러온다. 인쇄는 새 창에서 브라우저 인쇄. */
+   PDF 내려받기는 html2pdf(assets/vendor, 사이트에 직접 둠)를 그때 불러온다. 인쇄는 새 창에서 브라우저 인쇄. */
 (function (g) {
   var SUPPLIER = {
     name: '지티글로벌(주)', venue: '애월뮤직팩토리', no: '616-81-51642', rep: '최명성',
@@ -115,7 +115,7 @@
       '</table><div class="q-sign"><small>공급자</small>' + SUPPLIER.venue + '<br>대표 ' + SUPPLIER.signer + '<span class="q-seal">(인)</span><small>직인생략</small></div></div>' +
       '</div>';
     return { no: no, body: body, html: '<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>AMF A홀 대관 견적서 ' + no + '</title>' +
-      '<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet"><style>' + CSS + '</style></head><body>' + body + '</body></html>' };
+      '<link href="' + new URL('assets/css/fonts.css', location.href).href + '" rel="stylesheet"><style>' + CSS + '</style></head><body>' + body + '</body></html>' };
   }
 
   /* A4 한 장(296mm)에 안 들어가면 촘촘하게 */
@@ -130,7 +130,7 @@
     if (g.html2pdf) return Promise.resolve();
     return new Promise(function (ok, no) {
       var s = document.createElement('script');
-      s.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
+      s.src = 'assets/vendor/html2pdf.bundle.min.js';   // 외부 CDN 호출 없이 (처리방침 v4)
       s.onload = ok; s.onerror = no; document.head.appendChild(s);
     });
   }
