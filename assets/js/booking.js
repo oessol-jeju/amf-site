@@ -62,12 +62,12 @@
     for (var i = 0; i < first; i++) h += '<div></div>';
     for (var d = 1; d <= last; d++) {
       var iso = y + '-' + pad(m + 1) + '-' + pad(d), wd = (first + d - 1) % 7;
-      var off = iso <= today || wd === 1;                     // 지난 날·당일·월요일 휴관
+      var off = iso <= today;                                 // 지난 날·당일 (휴관일 없음 — 2026-11-08)
       var dots = '';
       if (!off && S.sp) S.sp.slots.forEach(function (s) { dots += '<i' + (slotFree(iso, s) ? '' : ' class="x"') + '></i>'; });
       var we = S.pr && AMFPricing.dayType(S.pr, iso) === 'weekend';
       h += '<button type="button" data-d="' + iso + '"' + (off ? ' disabled' : '') + ' aria-pressed="' + (iso === S.date) + '"' +
-           ' aria-label="' + (m + 1) + '월 ' + d + '일' + (wd === 1 ? ' 휴관' : '') + '">' +
+           ' aria-label="' + (m + 1) + '월 ' + d + '일">' +
            '<span' + (we && !off ? ' class="we"' : '') + '>' + d + '</span><span class="dots">' + dots + '</span></button>';
     }
     $('mcal').innerHTML = h;

@@ -31,8 +31,7 @@
             if (!href && p.url) href = p.url;
           });
           if (!ks.length) {
-            if (wd === 1) body = '<span class="ev off">휴관</span>';
-            else if (!past) { body = '<span class="ev off">대관 가능' + (note ? '<br>' + esc(note) : '') + '</span>'; href = 'booking.html'; }
+            if (!past) { body = '<span class="ev off">대관 가능' + (note ? '<br>' + esc(note) : '') + '</span>'; href = 'booking.html'; }
           }
           if (past) href = '';
           var tag = href ? 'a' : 'div';

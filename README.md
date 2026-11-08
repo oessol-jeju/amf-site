@@ -13,3 +13,13 @@
 - 점선 노란 표시(`.todo`)는 확인이 필요한 사실. 2026-10-26 공개 전환 뒤 `./deploy.sh`는 공개판으로 올리며, 하나라도 남으면 멈춘다.
 - 시험 주소(github.io·로컬)에서는 대관 신청이 실제로 전송되지 않는다. `aewolmusicfactory.com` 에서만 접수된다.
 - 설계: 워크스페이스 `11_AMF공간/10_AMF운영/웹사이트/기획_AMF홈페이지_HTML이전_설계_v6.md`
+
+## 기기별 작업본 (2026-11-08)
+
+| 기기 | 작업본 | 올리기 |
+|---|---|---|
+| 맥북 | `~/amf-site` | `./deploy.sh "내용"` — SSH 배포 키 `~/.ssh/amf_site_deploy` |
+| 윈도우 PC | `C:\Users\oesso\amf-site` | Git Bash에서 `./deploy.sh "내용"` — HTTPS, GitHub 로그인(Git Credential Manager)이 한 번 저장되면 그다음부터 자동 |
+
+- 작업 시작 전 항상 `git pull` — 두 기기가 같은 저장소를 고친다.
+- 윈도우 로컬 미리보기: `python -m http.server 8781 --directory C:/Users/oesso/amf-site` → http://localhost:8781
