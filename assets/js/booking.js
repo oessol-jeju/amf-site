@@ -21,7 +21,10 @@
     return /^h\d+$/.test(id) ? [+id.slice(1)] : [];
   }
   function loadTaken() {
-    return fetch(GAS_URL).then(function (r) { return r.json(); }).then(function (d) {
+    /* 12초 안에 답이 없으면 끊고 안내 문구로 넘어간다 (Apps Script 지연 대비) */
+    var ac = window.AbortController ? new AbortController() : null, timer = ac && setTimeout(function () { ac.abort(); }, 12000);
+    return fetch(GAS_URL, ac ? { signal: ac.signal } : undefined).then(function (r) { return r.json(); }).then(function (d) {
+      clearTimeout(timer);
       S.taken = {};
       (d.reservations || []).forEach(function (x) {
         var set = S.taken[x.date] || (S.taken[x.date] = {});
@@ -256,6 +259,9 @@
   AMFPricing.load().then(function (pr) {
     if (!pr) { say('요금표를 불러오지 못했습니다. 064-711-9263으로 문의해 주십시오.', 1); return; }
     S.pr = pr; S.sp = AMFPricing.space(pr, SPACE);
-    renderCal(); renderBlocks(); update(); loadTaken(); quoteButtons();
+    renderCal(); renderBlocks(); update(); quoteButtons();
+    /* 공연 편성(사이트 안 파일)부터 바로 막아 보여 주고, 예약 현황(서버)은 이어서 덧입힌다 */
+    markShows().then(function () { if (!S.loaded) { renderCal(); renderBlocks(); } });
+    loadTaken();
   });
 })();

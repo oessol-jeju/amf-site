@@ -16,7 +16,9 @@ ASSET_V = datetime.datetime.now().strftime('%Y%m%d%H%M')  # css·js 캐시 무�
 
 NAV = [
     ('index',    './',                                '공연 안내'),
+    ('shows',    'shows.html',                      '공연 예약'),
     ('booking',  'booking.html',                    '대관 예약'),
+    ('group',    'group.html',                      '기업 · 단체'),
     ('jeju',     'https://oessol.kr/jeju-events/',   '문화예술정보'),
     ('venue',    'venue.html',                      '공연장 이용안내'),
     ('essencia', 'essencia.html',                   '에센시아 합창단', [   # 하위 메뉴
@@ -63,7 +65,7 @@ LAYOUT = '''<!doctype html>
     <button class="burger" type="button" aria-expanded="false" aria-controls="nav">메뉴</button>
     <nav class="nav" id="nav" aria-label="주 메뉴">
 {nav}
-      <a class="buy" href="{naver}">예매</a>
+      <a class="buy" href="shows.html">예매</a>
     </nav>
   </div>
 </header>
